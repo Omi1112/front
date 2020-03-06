@@ -1,24 +1,16 @@
 import axios from "axios";
 
 export const state = () => ({
-  count: 0,
-  users: [],
+  token: "",
+  auth: false,
 })
 
 export const mutations = {
-  add(state) {
-    console.log('add')
-    state.count += 1
+  setToken(state, token) {
+    state.token = token
   },
-  take (state) {
-    state.count -= 1
-  },
-  reset(state) {
-    state.count = 0
-  },
-  set(state, users) {
-    // console.log('set Users!!')
-    state.users = users
+  setAuth(state, auth) {
+    state.auth = auth
   },
 }
 
@@ -34,7 +26,18 @@ export const actions = {
   },
   async signup({ commit }, userData) {
     console.log(userData)
-    var response = await axios.post('http://localhost:8080/users')
-    console.log(response)
+    console.log('userData')
+    var response = await axios.post('http://localhost:8080/users', userData)
+    commit('setAuth', true)
+  },
+  async login({ commit }, userData) {
+    var response = await axios.post('http://localhost:8080/users/login', userData)
+
+    commit('setToken', response.data.token)
+    commit('setAuth', true)
+  },
+  async logout({ commit }) {
+    commit('setToken', "")
+    commit('setAuth', false)
   },
 }

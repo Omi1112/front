@@ -1,50 +1,62 @@
 <template>
-  <div class="">
-    <form @submit.prevent="login">
-      <p class="error" v-if="error">{{ error }}</p>
-      <p><input type="text" v-model="email" placeholder="email" name="email"/></p>
-      <p><input type="text" v-model="password" placeholder="password" name="password"/></p>
-      <div class="login-btn">
-        <button type="submit">ログイン</button>
-      </div>
-    </form>
-    <form @submit.prevent="signup">
-      <p class="error" v-if="error">{{ error }}</p>
-      <p><input type="text" v-model="name" placeholder="name" name="name"/></p>
-      <p><input type="text" v-model="email" placeholder="email" name="email"/></p>
-      <p><input type="text" v-model="password" placeholder="password" name="password"/></p>
-      <div class="login-btn">
-        <button type="submit">ログイン</button>
-      </div>
-    </form>
+  <transition>
+  <div id="login">
+    <transition name="button-fade" mode="out-in">
+      <el-button v-if="view==='Login'" type="primary" @click="toggle" key="signup">初めてですか？</el-button>
+      <el-button v-else type="" @click="toggle" key="login">アカウントを既にお持ちですか？</el-button>
+    </transition>
+    <transition name="component-fade" mode="out-in">
+      <component v-bind:is="view"></component>
+    </transition>
+    <el-button @click="logout">ログアウト</el-button>
   </div>
+  </transition>
 </template>
+
 <script>
+import Login from './login/Login.vue'
+import Signup from './login/Signup.vue'
+
   export default {
+    components: {
+      Login,
+      Signup
+    },
     data() {
       return {
         error: null,
-        name: "",
-        email: "",
-        password: "",
+        button_type: 'primary',
+        view: 'Login',
       }
     },
     methods: {
-      async signup() {
-        console.log('北よ')
-        try {
-          await this.$store.dispatch("users/signup", {
-            name: this.name,
-            email: this.email,
-            password: this.password
-          })
-          this.$router.push("/")
-        } catch(e) {
-          this.error = e.message
+      toggle() {
+        if(this.view === 'Signup'){
+          this.view = 'Login'
+        } else{
+          this.view = 'Signup'
         }
+      },
+      logout() {
+        this.$store.dispatch("users/logout")
       }
     }
   }
 </script>
+
 <style>
+.component-fade-enter-active, .component-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.component-fade-enter, .component-fade-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
+.button-fade-enter-active, .button-fade-leave-active {
+  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.button-fade-enter, .button-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
 </style>

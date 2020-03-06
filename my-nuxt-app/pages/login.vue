@@ -1,34 +1,35 @@
 <template>
   <section class="container">
+    <login/>
     <div>
-      <login/>
+      {{auth}}
     </div>
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
 import Login from '~/components/Login.vue'
 
 export default {
+  computed: {
+    auth() {return this.$store.state.users.auth}
+  },
+  watach: {
+    auth(val,old) {
+        console.log('auth:' + val)
+        if (val) {
+          this.$router.push("/")
+        }
+
+    },
+  },
   components: {
-    AppLogo,
     Login
   },
   data() {
     return {
-      newItem: '',
-      todos: []
     }
   },
-  methods: {
-    addItem: function(event) {
-      var todo = {
-        item: this.newItem
-      };
-    this.todos.push(todo)
-    }
-  }
 }
 </script>
 

@@ -25,7 +25,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
@@ -48,7 +48,19 @@ module.exports = {
   plugins: [
     { src: '~/plugins/localStorage.js', ssr: false },
     { src: '~/plugins/routerOption.js', ssr: false },
-    { src: '~plugins/element-ui', ssr: true},
+    { src: '~plugins/element-ui', ssr: true },
+    { src: '~/plugins/vee-validate', ssr: false },
   ],
 
+  build: {
+    transpile: [
+      "vee-validate/dist/rules"
+    ]
+  },
+
+
+  env: {
+    userUrl: process.env.USER_URL || 'http://localhost:8080/users/test',
+    postUrl: process.env.USER_URL || 'http://localhost:8090/posts',
+  },
 }

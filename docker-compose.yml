@@ -1,6 +1,6 @@
 version: '3'
 services:
-  web:
+  front:
     build: .
     ports:
       - 3002:3000
@@ -8,3 +8,13 @@ services:
       - .:/app
     stdin_open: true
     tty: true
+    environment:
+      USER_URL: http://localhost:8080/users/
+    working_dir: /app/my-nuxt-app
+    command: npm run dev
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    external: true

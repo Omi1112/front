@@ -18,6 +18,7 @@
     "dayjs": "^1.8.20",
     "element-ui": "^2.13.0",
     "nuxt": "^2.0.0",
+    "vee-validate": "^3.2.5",
     "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {

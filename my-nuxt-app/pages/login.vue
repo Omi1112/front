@@ -14,14 +14,13 @@ export default {
   computed: {
     auth() {return this.$store.state.users.auth}
   },
-  watach: {
-    auth(val,old) {
-        console.log('auth:' + val)
-        if (val) {
-          this.$router.push("/")
-        }
-
-    },
+  watch: {
+    // auth(val,old) {
+    //     console.log('auth:' + val)
+    //     if (val) {
+    //       this.$router.push("/")
+    //     }
+    // },
   },
   components: {
     Login

@@ -1,6 +1,9 @@
 <template>
   <section class="container">
-    <div>
+    <login v-if="!auth"/>
+    <div v-if="auth">
+      {{test}}
+      <!-- {{context.env.userUrl}} -->
       <app-logo/>
       <div id="app">
         <h1 class="title">
@@ -24,10 +27,16 @@
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import Login from '~/components/Login.vue'
 
 export default {
+  computed: {
+    test() {return process.env.userUrl},
+    auth() {return this.$store.state.users.auth}
+  },
   components: {
-    AppLogo
+    AppLogo,
+    Login,
   },
   data() {
     return {

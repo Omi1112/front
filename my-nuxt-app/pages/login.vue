@@ -1,18 +1,26 @@
 <template>
   <section class="container">
-    <login/>
+    <login />
     <div>
-      {{auth}}
+      {{ auth }}
     </div>
   </section>
 </template>
 
 <script>
-import Login from '~/components/Login.vue'
+import Login from "~/components/Login.vue"
 
 export default {
+  components: {
+    Login
+  },
+  data() {
+    return {}
+  },
   computed: {
-    auth() {return this.$store.state.users.auth}
+    auth() {
+      return this.$store.state.users.auth
+    }
   },
   watch: {
     // auth(val,old) {
@@ -21,14 +29,7 @@ export default {
     //       this.$router.push("/")
     //     }
     // },
-  },
-  components: {
-    Login
-  },
-  data() {
-    return {
-    }
-  },
+  }
 }
 </script>
 
@@ -42,7 +43,8 @@ export default {
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 100px;

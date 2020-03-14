@@ -3,7 +3,7 @@ services:
   front:
     build: .
     ports:
-      - 3002:3000
+      - 3000:3000
     volumes:
       - .:/app
     stdin_open: true

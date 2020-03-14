@@ -2,24 +2,24 @@
   <div id="post-list">
     <el-button @click="postWindowFlg = !postWindowFlg">投稿</el-button>
     <transition name="button-fade">
-    <el-card v-if="postWindowFlg" class="box-card" >
-      <form @submit.prevent="send">
-        <p class="error" v-if="error">{{ error }}</p>
-        <el-input
-          type="textarea"
-          :autosize="{ minRows: 4}"
-          placeholder="何困っている？？"
-          v-model="body">
-        </el-input>
-        <el-button type="primary" native-type="submit">送信</el-button>
-      </form>
-    </el-card>
+      <el-card v-if="postWindowFlg" class="box-card">
+        <form @submit.prevent="send">
+          <p v-if="error" class="error">{{ error }}</p>
+          <el-input
+            :autosize="{ minRows: 4 }"
+            v-model="body"
+            type="textarea"
+            placeholder="何困っている？？"
+          />
+          <el-button type="primary" native-type="submit">送信</el-button>
+        </form>
+      </el-card>
     </transition>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
   data() {
@@ -27,21 +27,21 @@ export default {
       postWindowFlg: false,
       show: true,
       error: null,
-      body: "",
+      body: ""
     }
   },
   methods: {
     async send() {
       try {
-        var response = await axios.post(
-          'http://localhost:8090/posts',
-          {body: this.body, token: this.$store.state.users.token}
-        )
-        this.postWindowFlg = false;
-      } catch(e) {
+        var response = await axios.post("http://localhost:8090/posts", {
+          body: this.body,
+          token: this.$store.state.users.token
+        })
+        this.postWindowFlg = false
+      } catch (e) {
         this.error = e.message
       }
-    },
+    }
   }
 }
 </script>
@@ -56,10 +56,12 @@ export default {
   content: "";
 }
 .clearfix:after {
-  clear: both
+  clear: both;
 }
 
 .box-card {
-  width: 480px;
+  width: 600px;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 </style>

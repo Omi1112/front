@@ -1,22 +1,26 @@
 <template>
-  <div id="post-list">
-    <transition-group tag="div" class="list" name="button-fade">
-      <div v-for="(post, key) in posts" :key="post" :data-index="key">
-          <card :post="post" key="key" />
+  <div class="post-list">
+    <transition-group tag="div" class="list" name="button-fade" mode="out-in">
+      <div v-for="(post, key) in posts" :key="post.post.id" :data-index="key">
+        <card key="key" :post="post" />
       </div>
     </transition-group>
   </div>
 </template>
 
 <script>
-import Card from '~/components/posts/Card.vue'
+import Card from "~/components/posts/Card.vue"
 export default {
   components: {
-    Card,
+    Card
   },
-  props:['posts'],
+  props: {
+    posts: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
 
-<style>
-</style>
+<style></style>

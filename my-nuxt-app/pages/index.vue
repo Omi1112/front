@@ -1,17 +1,16 @@
 <template>
   <section class="container">
-    <login v-if="!auth"/>
+    <login v-if="!auth" />
     <div v-if="auth">
-      {{test}}
-      <!-- {{context.env.userUrl}} -->
-      <app-logo/>
+      {{ test }}
+      <app-logo />
       <div id="app">
         <h1 class="title">
           アプリ名
         </h1>
-        <input type="text" v-model="newItem">
-        <form v-on:submit.prevent>
-          <button v-on:click="addItem">add</button>
+        <input v-model="newItem" type="text" />
+        <form @submit.prevent>
+          <button @click="addItem">add</button>
         </form>
         <li v-for="(todo, key) in todos" :key="key">
           {{ todo.item }}
@@ -19,37 +18,41 @@
         <h2 class="subtitle">
           アプリ名
         </h2>
-        <nuxt-link to="/test">new cout page</nuxt-link><br>
+        <nuxt-link to="/test">new cout page</nuxt-link><br />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-import Login from '~/components/Login.vue'
+import AppLogo from "~/components/AppLogo.vue"
+import Login from "~/components/Login.vue"
 
 export default {
-  computed: {
-    test() {return process.env.userUrl},
-    auth() {return this.$store.state.users.auth}
-  },
   components: {
     AppLogo,
-    Login,
+    Login
   },
   data() {
     return {
-      newItem: '',
+      newItem: "",
       todos: []
+    }
+  },
+  computed: {
+    test() {
+      return process.env.userUrl
+    },
+    auth() {
+      return this.$store.state.users.auth
     }
   },
   methods: {
     addItem: function(event) {
       var todo = {
         item: this.newItem
-      };
-    this.todos.push(todo)
+      }
+      this.todos.push(todo)
     }
   }
 }
@@ -65,7 +68,8 @@ export default {
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 100px;

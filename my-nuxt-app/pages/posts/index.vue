@@ -1,10 +1,9 @@
 <template>
   <section class="container">
-    <login v-if="!auth"/>
+    <login v-if="!auth" />
     <div v-if="auth">
       <div id="app">
         <Create />
-        <!-- {{ posts }} -->
         <el-button @click="getPosts">データゲット！</el-button>
         <el-button @click="getTodoList">TODOゲット！</el-button>
 
@@ -15,28 +14,30 @@
 </template>
 
 <script>
-import Login from '~/components/Login.vue'
-import List from '~/components/posts/List.vue'
-import Create from '~/components/posts/Create.vue'
-import axios from "axios";
+import Login from "~/components/Login.vue"
+import List from "~/components/posts/List.vue"
+import Create from "~/components/posts/Create.vue"
+import axios from "axios"
 
 export default {
-  computed: {
-    auth() {return this.$store.state.users.auth}
-  },
   components: {
     Login,
     List,
-    Create,
+    Create
   },
   data() {
     return {
-      newItem: '',
+      newItem: "",
       todos: [],
       posts: []
     }
   },
-  async asyncData () {
+  computed: {
+    auth() {
+      return this.$store.state.users.auth
+    }
+  },
+  async asyncData() {
     // メモ本来はここでデータを取得したいが、名前解決の観点からローカルでテストできないため、一旦getPostsでデータを取得する。
     // try {
     //   var callApi = async function () {
@@ -48,18 +49,19 @@ export default {
     //   }
     //   setInterval(callApi,10000)
     // } catch (error) {
-
     // }
   },
   methods: {
     getPosts: async function(event) {
-      var response = await axios.get('http://localhost:8090/posts')
+      var response = await axios.get("http://localhost:8090/posts")
       console.log(response)
       this.posts = response.data
     },
     getTodoList: async function(event) {
       // console.log('set Users!!')
-      var response = await axios.get('http://localhost:8090/helper/' + this.$store.state.users.loginId)
+      var response = await axios.get(
+        "http://localhost:8090/helper/" + this.$store.state.users.loginId
+      )
       console.log(response)
       this.posts = response.data
       // commit('set', response.data)
@@ -70,32 +72,6 @@ export default {
 
 <style>
 .container {
-  /* display: flex; */
-  justify-content: center;
-  /* min-height: 100vh; */
-  align-items: center;
   text-align: center;
 }
-/*
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-} */
-
 </style>

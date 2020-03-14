@@ -1,21 +1,43 @@
+// https://eslint.org/docs/user-guide/configuring
+
 module.exports = {
   root: true,
   env: {
-    browser: true,
-    node: true
+    browser: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    sourceType: "module",
+    parser: "babel-eslint"
   },
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
-    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
-    'plugin:vue/essential'
+    "prettier",
+    "prettier/standard",
+    'plugin:vue/essential',
+    "plugin:vue/recommended"
   ],
-  // required to lint *.vue files
-  plugins: [
-    'vue'
-  ],
-  // add your custom rules here
-  rules: {}
-}
+  plugins: ["vue", "prettier"],
+  rules: {
+    'semi': [2, 'never'],
+    'no-console': 'off',
+    'vue/max-attributes-per-line': 'off',
+    'prettier/prettier': ['error', { 'semi': false }],
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "always",
+      }
+    }],
+    // "generator-star-spacing": "off",
+    // "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+    // "properties": "always",
+    // "ignoreDestructuring": false,
+    // "prettier/prettier": [
+    //   "error",
+    //   {
+    //     trailingComma: "none",
+    //     singleQuote: true,
+    //     semi: false,
+    //     printWidth: 120,
+    //   }
+    // ]
+  }
+};

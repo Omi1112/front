@@ -1,11 +1,11 @@
 <template>
   <section class="container">
-    <login v-if="!auth"/>
+    <login v-if="!auth" />
     <div v-if="auth">
       <div id="app">
         <Create />
 
-        {{postWindowFlg}}
+        {{ postWindowFlg }}
         {{ posts }}
         <el-button @click="getPosts">データゲット！</el-button>
         <List :posts="posts" />
@@ -19,28 +19,30 @@
 </template>
 
 <script>
-import Login from '~/components/Login.vue'
-import List from '~/components/posts/List.vue'
-import Create from '~/components/posts/Create.vue'
-import axios from "axios";
+import Login from "~/components/Login.vue"
+import List from "~/components/posts/List.vue"
+import Create from "~/components/posts/Create.vue"
+import axios from "axios"
 
 export default {
-  computed: {
-    auth() {return this.$store.state.users.auth}
-  },
   components: {
     Login,
     List,
-    Create,
+    Create
   },
   data() {
     return {
-      newItem: '',
+      newItem: "",
       todos: [],
       posts: []
     }
   },
-  async asyncData () {
+  computed: {
+    auth() {
+      return this.$store.state.users.auth
+    }
+  },
+  async asyncData() {
     // メモ本来はここでデータを取得したいが、名前解決の観点からローカルでテストできないため、一旦getPostsでデータを取得する。
     // try {
     //   var callApi = async function () {
@@ -52,16 +54,14 @@ export default {
     //   }
     //   setInterval(callApi,10000)
     // } catch (error) {
-
     // }
   },
   methods: {
     getPosts: async function(event) {
-      console.log('set Users!!')
-      var response = await axios.get('http://localhost:8090/posts')
+      console.log("set Users!!")
+      var response = await axios.get("http://localhost:8090/posts")
       console.log(response)
       this.posts = response.data
-      // commit('set', response.data)
     }
   }
 }
@@ -77,7 +77,8 @@ export default {
 }
 
 .title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
   display: block;
   font-weight: 300;
   font-size: 100px;

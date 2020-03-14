@@ -74,12 +74,6 @@ export default {
   components: {
     ValidError
   },
-  props: {
-    signup_show: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       show: true,

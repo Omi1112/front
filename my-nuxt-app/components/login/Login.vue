@@ -56,12 +56,6 @@ export default {
   components: {
     ValidError
   },
-  props: {
-    login_show: {
-      type: String,
-      required: true
-    }
-  },
   data() {
     return {
       show: true,

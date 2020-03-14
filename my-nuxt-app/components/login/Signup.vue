@@ -10,16 +10,15 @@
           name="お名前"
         >
           <p>
-            <input
+            <el-input
               v-model="name"
               type="text"
               placeholder="お名前"
               name="name"
+              class="input-text"
             />
           </p>
-          <p v-show="errors.length" class="help is-danger">
-            {{ errors[0] }}
-          </p>
+          <valid-error :errors="errors" />
         </validation-provider>
 
         <validation-provider
@@ -28,16 +27,15 @@
           name="メールアドレス"
         >
           <p>
-            <input
+            <el-input
               v-model="email"
               type="text"
               placeholder="メールアドレス"
               name="email"
+              class="input-text"
             />
           </p>
-          <p v-show="errors.length" class="help is-danger">
-            {{ errors[0] }}
-          </p>
+          <valid-error :errors="errors" />
         </validation-provider>
 
         <validation-provider
@@ -46,16 +44,15 @@
           name="パスワード"
         >
           <p>
-            <input
+            <el-input
               v-model="password"
               type="password"
               placeholder="パスワード"
               name="password"
+              class="input-text"
             />
           </p>
-          <p v-show="errors.length" class="help is-danger">
-            {{ errors[0] }}
-          </p>
+          <valid-error :errors="errors" />
         </validation-provider>
 
         <el-button
@@ -69,8 +66,14 @@
     </validation-observer>
   </div>
 </template>
+
 <script>
+import ValidError from "~/components/common/ValidError.vue"
+
 export default {
+  components: {
+    ValidError
+  },
   props: {
     signup_show: {
       type: String,
@@ -103,4 +106,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.input-text {
+  width: 200px;
+}
+</style>

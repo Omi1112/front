@@ -2,8 +2,7 @@
   <div id="login">
     <validation-observer v-slot="ObserverProps" ref="obs">
       <form @submit.prevent="login">
-        <p v-if="error" class="error">{{ error }}</p>
-
+        <valid-error :errors="error" />
         <validation-provider
           v-slot="{ errors }"
           rules="required|email"
@@ -18,11 +17,7 @@
               class="input-text"
             />
           </p>
-          <transition name="component-fade" mode="out-in">
-            <p v-if="errors.length" class="help is-danger">
-              {{ errors[0] }}
-            </p>
-          </transition>
+          <valid-error :errors="errors" />
         </validation-provider>
 
         <validation-provider
@@ -39,11 +34,7 @@
               class="input-text"
             />
           </p>
-          <transition name="component-fade" mode="out-in">
-            <p v-if="errors.length" class="help is-danger">
-              {{ errors[0] }}
-            </p>
-          </transition>
+          <valid-error :errors="errors" />
         </validation-provider>
 
         <el-button
@@ -59,7 +50,12 @@
 </template>
 
 <script>
+import ValidError from "~/components/common/ValidError.vue"
+
 export default {
+  components: {
+    ValidError
+  },
   props: {
     login_show: {
       type: String,
@@ -69,7 +65,7 @@ export default {
   data() {
     return {
       show: true,
-      error: null,
+      error: [],
       email: "",
       password: ""
     }
@@ -83,7 +79,9 @@ export default {
         })
         console.log(this.$store.state.users)
       } catch (e) {
-        this.error = e.message
+        this.error.push(
+          "ログインに失敗しました。メールアドレスとパスワードを確認してください。"
+        )
       }
     }
   }

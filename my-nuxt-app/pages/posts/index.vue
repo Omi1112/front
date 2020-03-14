@@ -70,4 +70,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.container {
+  text-align: center;
+}
+</style>

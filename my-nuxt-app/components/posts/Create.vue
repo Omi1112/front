@@ -60,6 +60,8 @@ export default {
 }
 
 .box-card {
-  width: 480px;
+  width: 600px;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 </style>

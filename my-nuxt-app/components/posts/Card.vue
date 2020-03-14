@@ -90,26 +90,6 @@ export default {
 </script>
 
 <style>
-.text {
-  font-size: 14px;
-}
-
-.item {
-  margin-bottom: 18px;
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both;
-}
-
-.box-card {
-  width: 480px;
-}
 .button-fade-enter-active,
 .button-fade-leave-active {
   transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);

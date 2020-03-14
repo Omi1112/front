@@ -1,54 +1,70 @@
 <template>
   <div id="login">
-    <form @submit.prevent="login">
-      <p v-if="error" class="error">{{ error }}</p>
+    <validation-observer v-slot="ObserverProps" ref="obs">
+      <form @submit.prevent="login">
+        <p v-if="error" class="error">{{ error }}</p>
 
-      <validation-provider
-        v-slot="{ errors }"
-        rules="required|email"
-        name="メールアドレス"
-      >
-        <p>
-          <input
-            v-model="email"
-            type="text"
-            placeholder="メールアドレス"
-            name="email"
-          />
-        </p>
-        <p v-show="errors.length" class="help is-danger">
-          {{ errors[0] }}
-        </p>
-      </validation-provider>
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required|email"
+          name="メールアドレス"
+        >
+          <p>
+            <el-input
+              v-model="email"
+              type="text"
+              placeholder="メールアドレス"
+              name="email"
+              class="input-text"
+            />
+          </p>
+          <transition name="component-fade" mode="out-in">
+            <p v-if="errors.length" class="help is-danger">
+              {{ errors[0] }}
+            </p>
+          </transition>
+        </validation-provider>
 
-      <validation-provider
-        v-slot="{ errors }"
-        rules="required|alpha_num|min:8|max:100"
-        name="パスワード"
-      >
-        <p>
-          <input
-            v-model="password"
-            type="password"
-            placeholder="パスワード"
-            name="password"
-          />
-        </p>
-        <p v-show="errors.length" class="help is-danger">
-          {{ errors[0] }}
-        </p>
-      </validation-provider>
+        <validation-provider
+          v-slot="{ errors }"
+          rules="required|alpha_num|min:8|max:100"
+          name="パスワード"
+        >
+          <p>
+            <el-input
+              v-model="password"
+              type="password"
+              placeholder="パスワード"
+              name="password"
+              class="input-text"
+            />
+          </p>
+          <transition name="component-fade" mode="out-in">
+            <p v-if="errors.length" class="help is-danger">
+              {{ errors[0] }}
+            </p>
+          </transition>
+        </validation-provider>
 
-      <el-button type="" native-type="submit">ログイン</el-button>
-    </form>
+        <el-button
+          :disabled="ObserverProps.invalid"
+          type=""
+          native-type="submit"
+        >
+          ログイン
+        </el-button>
+      </form>
+    </validation-observer>
   </div>
 </template>
 
 <script>
 export default {
-  login_show: {
-    type: String,
-    required: true
+  props: {
+    login_show: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
@@ -74,4 +90,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.input-text {
+  width: 200px;
+}
+</style>

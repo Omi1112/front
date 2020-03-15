@@ -41,6 +41,7 @@
       </div>
       <div class="text item">
         {{ post.post.body }}
+        {{ post.post.point }}
       </div>
     </el-card>
   </transition>

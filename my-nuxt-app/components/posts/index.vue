@@ -47,7 +47,7 @@ export default {
     // try {
     //   var callApi = async function () {
     //     console.log('set Users!!')
-    //     var response = await axios.get('http://localhost:8090/posts')
+    //     var response = await axios.get(process.env.postUrl + "/posts")
     //     console.log(response)
     //     this.posts = response.data
     //     // commit('set', response.data)
@@ -59,7 +59,7 @@ export default {
   methods: {
     getPosts: async function(event) {
       console.log("set Users!!")
-      var response = await axios.get("http://localhost:8090/posts")
+      var response = await axios.get(process.env.postUrl + "/posts")
       console.log(response)
       this.posts = response.data
     }

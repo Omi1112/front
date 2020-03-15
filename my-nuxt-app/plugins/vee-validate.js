@@ -27,7 +27,7 @@ extend("alpha_num", alpha_num)
 extend("email_unique", {
   validate: value => {
     try {
-      var resp = axios.Get("http://localhost:8080/exist/email/" + value)
+      var resp = axios.Get(process.env.postUrl + "/exist/email/" + value)
       return false
     } catch (error) {
       console.log(error)

@@ -64,7 +64,7 @@ export default {
   methods: {
     async set() {
       try {
-        var response = await axios.post("http://localhost:8090/helper", {
+        var response = await axios.post(process.env.postUrl + "/helper", {
           id: this.post.post.id,
           token: this.$store.state.users.token
         })
@@ -77,7 +77,7 @@ export default {
     async take() {
       try {
         var response = await axios.delete(
-          "http://localhost:8090/helper/" + this.post.post.id,
+          process.env.postUrl + "/helper/" + this.post.post.id,
           { data: { token: this.$store.state.users.token } }
         )
         this.post.post = response.data

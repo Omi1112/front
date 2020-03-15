@@ -9,7 +9,8 @@ services:
     stdin_open: true
     tty: true
     environment:
-      USER_URL: http://localhost:8080/users/
+      USER_URL: http://localhost:8080
+      POST_URL: http://localhost:8090
     working_dir: /app/my-nuxt-app
     command: npm run dev
     networks:

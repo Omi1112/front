@@ -22,21 +22,18 @@ export const actions = {
   async getUsers({ commit }) {
     var callApi = async function() {
       console.log("set Users!!")
-      var response = await axios.get("http://localhost:8080/users")
+      var response = await axios.get(process.env.userUrl + "/users")
       commit("set", response.data)
     }
     setInterval(callApi, 10000)
   },
   async signup({ dispatch }, userData) {
-    var response = await axios.post("http://localhost:8080/users", userData)
+    var response = await axios.post(process.env.userUrl + "/users", userData)
     await dispatch("login", userData)
   },
   async login({ commit }, userData) {
     console.log(userData)
-    var response = await axios.post(
-      "http://localhost:8080/users/login",
-      userData
-    )
+    var response = await axios.post(process.env.userUrl + "/auth", userData)
     console.log(response.data)
 
     commit("setToken", response.data.token)

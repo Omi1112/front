@@ -16,34 +16,36 @@
           <el-col :span="12">
             <transition name="button-fade" mode="out-in">
               <span v-if="post.post.userId === loginId" key="me">
-                <el-button
-                  v-if="post.post.helpserUserId === 0"
-                  key="accepting"
-                  type="success"
-                  disabled
-                >
-                  受付中
-                </el-button>
+                <transition name="button-fade" mode="out-in">
+                  <el-button
+                    v-if="post.post.helpserUserId === 0"
+                    key="accepting"
+                    type="success"
+                    disabled
+                  >
+                    受付中
+                  </el-button>
 
-                <el-button
-                  v-else-if="
-                    post.post.helpserUserId != 0 && post.post.status === 0
-                  "
-                  key="payment"
-                  type="success"
-                  @click="donePayment"
-                >
-                  お助けありがとう！
-                </el-button>
+                  <el-button
+                    v-else-if="
+                      post.post.helpserUserId != 0 && post.post.status === 0
+                    "
+                    key="payment"
+                    type="success"
+                    @click="donePayment"
+                  >
+                    お助けありがとう！
+                  </el-button>
 
-                <el-button
-                  v-else
-                  key="payment_completion"
-                  type="success"
-                  disabled
-                >
-                  支払い完了！
-                </el-button>
+                  <el-button
+                    v-else
+                    key="payment_completion"
+                    type="success"
+                    disabled
+                  >
+                    支払い完了！
+                  </el-button>
+                </transition>
               </span>
 
               <span v-else-if="post.post.helpserUserId === 0" key="none">
@@ -56,32 +58,34 @@
                 v-else-if="post.post.helpserUserId === loginId"
                 key="helper"
               >
-                <el-button
-                  v-if="post.post.status === 0"
-                  key="delete"
-                  type="danger"
-                  @click="takeHelperId"
-                >
-                  解除！
-                </el-button>
+                <transition name="button-fade" mode="out-in">
+                  <el-button
+                    v-if="post.post.status === 0"
+                    key="delete"
+                    type="danger"
+                    @click="takeHelperId"
+                  >
+                    解除！
+                  </el-button>
 
-                <el-button
-                  v-else-if="post.post.status === 1"
-                  key="acceptance"
-                  type="success"
-                  @click="doneAcceptance"
-                >
-                  ポイント受取！
-                </el-button>
+                  <el-button
+                    v-else-if="post.post.status === 1"
+                    key="acceptance"
+                    type="success"
+                    @click="doneAcceptance"
+                  >
+                    ポイント受取！
+                  </el-button>
 
-                <el-button
-                  v-else
-                  key="acceptance_completion"
-                  type="success"
-                  disabled
-                >
-                  ポイント受取完了！
-                </el-button>
+                  <el-button
+                    v-else
+                    key="acceptance_completion"
+                    type="success"
+                    disabled
+                  >
+                    ポイント受取完了！
+                  </el-button>
+                </transition>
               </span>
 
               <span v-else key="other">
@@ -96,6 +100,7 @@
       <div class="text item">
         {{ post.post.body }}
         {{ post.post.point }}
+        {{ post }}
       </div>
     </el-card>
   </transition>
@@ -157,7 +162,6 @@ export default {
         var response = await axios.put(
           process.env.postUrl + "/done/" + this.post.post.id,
           {
-            // id: this.post.post.id,
             token: this.$store.state.users.token
           }
         )

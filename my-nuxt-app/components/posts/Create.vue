@@ -1,6 +1,7 @@
 <template>
   <div id="post-list">
-    <el-button @click="postWindowFlg = !postWindowFlg">投稿</el-button>
+    <el-button @click="windowToggle">投稿</el-button>
+    {{ maxPoint }}
     <transition name="button-fade">
       <el-card v-if="postWindowFlg" class="box-card">
         <form @submit.prevent="send">
@@ -30,8 +31,13 @@ export default {
       show: true,
       error: null,
       point: 0,
-      maxPoint: 10000,
+      maxPoint: 0,
       body: ""
+    }
+  },
+  computed: {
+    loginId() {
+      return this.$store.state.users.loginId
     }
   },
   methods: {
@@ -43,6 +49,19 @@ export default {
           token: this.$store.state.users.token
         })
         this.postWindowFlg = false
+      } catch (e) {
+        this.error = e.message
+      }
+    },
+    async windowToggle() {
+      console.log("run!!")
+      try {
+        var response = await axios.get(
+          process.env.postUrl + "/amount/" + this.loginId
+        )
+        console.log(response)
+        this.maxPoint = response.data.amontPyment
+        this.postWindowFlg = !this.postWindowFlg
       } catch (e) {
         this.error = e.message
       }

@@ -1,7 +1,6 @@
 <template>
   <div id="post-list">
     <el-button @click="windowToggle">投稿</el-button>
-    {{ maxPoint }}
     <transition name="button-fade">
       <el-card v-if="postWindowFlg" class="box-card">
         <form @submit.prevent="send">
@@ -12,7 +11,8 @@
             type="textarea"
             placeholder="何困っている？？"
           />
-          支払いポイント（持ちポイント：{{ maxPoint }}ポイント）
+          支払いポイント<br>
+          （支払い可能ポイント：{{ maxPoint | addComma }}ポイント）
           <el-slider v-model="point" :max="maxPoint" :step="10" show-input />
           <el-button type="primary" native-type="submit">送信</el-button>
         </form>
@@ -48,6 +48,8 @@ export default {
           point: this.point,
           token: this.$store.state.users.token
         })
+        this.body = ""
+        this.point = 0
         this.postWindowFlg = false
       } catch (e) {
         this.error = e.message
@@ -59,8 +61,7 @@ export default {
         var response = await axios.get(
           process.env.postUrl + "/amount/" + this.loginId
         )
-        console.log(response)
-        this.maxPoint = response.data.amontPyment
+        this.maxPoint = response.data.AmountPayment
         this.postWindowFlg = !this.postWindowFlg
       } catch (e) {
         this.error = e.message

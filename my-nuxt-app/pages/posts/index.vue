@@ -7,7 +7,7 @@
         <el-button @click="getPosts">データゲット！</el-button>
         <el-button @click="getTodoList">TODOゲット！</el-button>
 
-        <List :posts="posts" />
+        <List v-on:getPostsByUserID="getPostsByUserID" :posts="posts" />
       </div>
     </div>
   </section>
@@ -55,6 +55,12 @@ export default {
     getPosts: async function(event) {
       var response = await axios.get(process.env.postUrl + "/posts")
       console.log(response)
+      this.posts = response.data
+    },
+    getPostsByUserID: async function(id, name) {
+      var response = await axios.get(
+        process.env.postUrl + "/user/" + id
+      )
       this.posts = response.data
     },
     getTodoList: async function(event) {

@@ -4,12 +4,34 @@
       <div slot="header" class="clearfix">
         <el-row :gutter="5">
           <el-col :span="8">
-            <span>{{ post.user.name }}さんの投稿</span>
+            <el-button
+              type="text"
+              @click="$emit('getPostsByUserId', post.user.id, post.user.name)"
+            >
+              {{ post.user.name }}
+            </el-button>
+            さんの投稿
           </el-col>
           <el-col :span="8">
             <span v-if="post.post.helperUserId === 0">誰か助けてください！！</span>
-            <span v-else-if="post.post.status == 0">{{ post.helperUser.name }}さんが助けます！</span>
-            <span v-else-if="post.post.status != 0">{{ post.helperUser.name }}さんが助けました！</span>
+            <span v-else-if="post.post.status == 0">
+              <el-button
+                type="text"
+                @click="$emit('getPostsByUserId', post.helperUser.id, post.helperUser.name)"
+              >
+                {{ post.helperUser.name }}
+              </el-button>
+              さんが助けます！
+            </span>
+            <span v-else-if="post.post.status != 0">
+              <el-button
+                type="text"
+                @click="$emit('getPostsByUserId', post.helperUser.id, post.helperUser.name)"
+              >
+                {{ post.helperUser.name }}
+              </el-button>
+              さんが助けます！
+            </span>
           </el-col>
           <el-col :span="8">
             <transition name="button-fade" mode="out-in">

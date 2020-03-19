@@ -2,23 +2,21 @@
   <transition name="conter-fade" mode="out-in">
     <el-card shadow="hover" class="box-card">
       <div slot="header" class="clearfix">
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <span>{{ post.user.id }}</span>
+        <el-row :gutter="5">
+          <el-col :span="8">
+            <span>{{ post.user.name }}さんの投稿</span>
           </el-col>
-
-          <el-col :span="12">
-            <span>{{ post.user.name }}</span>
+          <el-col :span="8">
+            <span v-if="post.post.helperUserId === 0">誰か助けてください！！</span>
+            <span v-else-if="post.post.status == 0">{{ post.helperUser.name }}さんが助けます！</span>
+            <span v-else-if="post.post.status != 0">{{ post.helperUser.name }}さんが助けました！</span>
           </el-col>
-          <el-col :span="12">
-            <span>{{ post.post.helpserUserId }}</span>
-          </el-col>
-          <el-col :span="12">
+          <el-col :span="8">
             <transition name="button-fade" mode="out-in">
               <span v-if="post.post.userId === loginId" key="me">
                 <transition name="button-fade" mode="out-in">
                   <el-button
-                    v-if="post.post.helpserUserId === 0"
+                    v-if="post.post.helperUserId === 0"
                     key="accepting"
                     type="success"
                     disabled
@@ -28,7 +26,7 @@
 
                   <el-button
                     v-else-if="
-                      post.post.helpserUserId != 0 && post.post.status === 0
+                      post.post.helperUserId != 0 && post.post.status === 0
                     "
                     key="payment"
                     type="success"
@@ -48,14 +46,14 @@
                 </transition>
               </span>
 
-              <span v-else-if="post.post.helpserUserId === 0" key="none">
+              <span v-else-if="post.post.helperUserId === 0" key="none">
                 <el-button key="help" @click="setHelperId">
                   助ける！
                 </el-button>
               </span>
 
               <span
-                v-else-if="post.post.helpserUserId === loginId"
+                v-else-if="post.post.helperUserId === loginId"
                 key="helper"
               >
                 <transition name="button-fade" mode="out-in">
@@ -99,8 +97,6 @@
       </div>
       <div class="text item">
         {{ post.post.body }}
-        {{ post.post.point }}
-        {{ post }}
       </div>
     </el-card>
   </transition>

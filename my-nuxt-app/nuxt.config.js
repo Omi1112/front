@@ -39,6 +39,7 @@ module.exports = {
   axios: {},
   css: ["element-ui/lib/theme-chalk/index.css"],
   plugins: [
+    { src: "~/plugins/filter.js", ssr: false },
     { src: "~/plugins/localStorage.js", ssr: false },
     { src: "~/plugins/routerOption.js", ssr: false },
     { src: "~plugins/element-ui", ssr: true },

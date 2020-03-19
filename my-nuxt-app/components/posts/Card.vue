@@ -13,11 +13,19 @@
             さんの投稿
           </el-col>
           <el-col :span="8">
-            <span v-if="post.post.helperUserId === 0">誰か助けてください！！</span>
+            <span v-if="post.post.helperUserId === 0">
+              誰か助けてください！！
+            </span>
             <span v-else-if="post.post.status == 0">
               <el-button
                 type="text"
-                @click="$emit('getPostsByUserId', post.helperUser.id, post.helperUser.name)"
+                @click="
+                  $emit(
+                    'getPostsByUserId',
+                    post.helperUser.id,
+                    post.helperUser.name
+                  )
+                "
               >
                 {{ post.helperUser.name }}
               </el-button>
@@ -26,7 +34,13 @@
             <span v-else-if="post.post.status != 0">
               <el-button
                 type="text"
-                @click="$emit('getPostsByUserId', post.helperUser.id, post.helperUser.name)"
+                @click="
+                  $emit(
+                    'getPostsByUserId',
+                    post.helperUser.id,
+                    post.helperUser.name
+                  )
+                "
               >
                 {{ post.helperUser.name }}
               </el-button>
@@ -74,10 +88,7 @@
                 </el-button>
               </span>
 
-              <span
-                v-else-if="post.post.helperUserId === loginId"
-                key="helper"
-              >
+              <span v-else-if="post.post.helperUserId === loginId" key="helper">
                 <transition name="button-fade" mode="out-in">
                   <el-button
                     v-if="post.post.status === 0"

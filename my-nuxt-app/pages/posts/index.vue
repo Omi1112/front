@@ -3,11 +3,43 @@
     <login v-if="!auth" />
     <div v-if="auth">
       <div id="app">
-        <Create />
-        <el-button @click="getPosts">データゲット！</el-button>
-        <el-button @click="getTodoList">TODOゲット！</el-button>
-
-        <List v-on:getPostsByUserID="getPostsByUserID" :posts="posts" />
+        <el-row class="main">
+          <br />
+          <el-col :span="4">
+            <br />
+            <br />
+            <br />
+            <br />
+            <el-menu
+              default-active="2"
+              class="el-menu-vertical-demo"
+              @open="handleOpen"
+              @close="handleClose"
+            >
+              <el-submenu index="1">
+                <template slot="title">
+                  <i class="el-icon-document" />
+                  <span>助けて！！</span>
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="1-1" @click="getPosts">
+                    みんなの助けて！！
+                  </el-menu-item>
+                  <el-menu-item index="1-2" @click="getPostsByUserID(loginId)">
+                    あなたの助けて！！
+                  </el-menu-item>
+                  <el-menu-item index="1-3" @click="getTodoList">
+                    あなたが助ける！！
+                  </el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+            </el-menu>
+          </el-col>
+          <el-col :span="20">
+            <Create />
+            <List :posts="posts" @getPostsByUserID="getPostsByUserID" />
+          </el-col>
+        </el-row>
       </div>
     </div>
   </section>
@@ -29,12 +61,16 @@ export default {
     return {
       newItem: "",
       todos: [],
-      posts: []
+      posts: [],
+      isCollapse: true
     }
   },
   computed: {
     auth() {
       return this.$store.state.users.auth
+    },
+    loginId() {
+      return this.$store.state.users.loginId
     }
   },
   async asyncData() {
@@ -58,9 +94,7 @@ export default {
       this.posts = response.data
     },
     getPostsByUserID: async function(id, name) {
-      var response = await axios.get(
-        process.env.postUrl + "/user/" + id
-      )
+      var response = await axios.get(process.env.postUrl + "/user/" + id)
       this.posts = response.data
     },
     getTodoList: async function(event) {

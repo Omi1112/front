@@ -18,7 +18,6 @@
       <transition name="component-fade" mode="out-in">
         <component :is="view" />
       </transition>
-      <el-button @click="logout">ログアウト</el-button>
     </div>
   </transition>
 </template>
@@ -46,9 +45,6 @@ export default {
       } else {
         this.view = "Signup"
       }
-    },
-    logout() {
-      this.$store.dispatch("users/logout")
     }
   }
 }

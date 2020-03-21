@@ -7,16 +7,16 @@ jobs:
       - checkout
 
       - run:
-        name: create docker network
-        command: docker network create my_network
+          name: create docker network
+          command: docker network create my_network
 
       - run:
-        name: docker-compose up
-        command: docker-compose up -d
+          name: docker-compose up
+          command: docker-compose up -d
 
       - run:
-        name: lint
-        command: docker-compose exec front npm run lint
+          name: lint
+          command: docker-compose exec front npm run lint
 
   # 現在自動化できない部分のためコメントアウト
   # deploy:

@@ -12,7 +12,7 @@ services:
       USER_URL: http://localhost:8080
       POST_URL: http://localhost:8090
     working_dir: /app/my-nuxt-app
-    command: npm run dev
+    command: npm install && npm run dev
     networks:
       - my_network
 

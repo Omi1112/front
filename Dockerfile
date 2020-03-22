@@ -18,4 +18,4 @@ WORKDIR /app/my-nuxt-app
 
 RUN npm install
 
-CMD ["/bin/bash"]
+CMD ["/bin/ash"]

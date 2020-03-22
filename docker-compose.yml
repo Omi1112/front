@@ -13,7 +13,7 @@ services:
       POST_URL: http://localhost:8090
     working_dir: /app/my-nuxt-app
     command: >
-      ash -c 'npm install &&
+      bash -c 'npm install &&
       npm run dev'
     networks:
       - my_network

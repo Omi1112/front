@@ -14,7 +14,7 @@ jobs:
           name: docker-compose up
           command: docker-compose up -d
 
-      - run: ping 127.0.0.1 -c 5
+      - run: ping 127.0.0.1 -c 200
 
       - run:
           name: lint

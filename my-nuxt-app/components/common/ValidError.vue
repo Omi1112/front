@@ -10,7 +10,7 @@
 export default {
   props: {
     errors: {
-      type: Object,
+      type: Array,
       required: true
     }
   }

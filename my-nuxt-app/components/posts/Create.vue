@@ -11,7 +11,7 @@
             type="textarea"
             placeholder="何困っている？？"
           />
-          支払いポイント<br>
+          支払いポイント<br />
           （支払い可能ポイント：{{ maxPoint | addComma }}ポイント）
           <el-slider v-model="point" :max="maxPoint" :step="10" show-input />
           <el-button type="primary" native-type="submit">送信</el-button>

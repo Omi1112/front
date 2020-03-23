@@ -157,8 +157,7 @@ export default {
           id: this.post.post.id,
           token: this.$store.state.users.token
         })
-        console.log(this.post)
-        this.post.post = response.data
+        this.post = response.data
       } catch (e) {
         this.error = e.message
       }
@@ -169,7 +168,7 @@ export default {
           process.env.postUrl + "/helper/" + this.post.post.id,
           { data: { token: this.$store.state.users.token } }
         )
-        this.post.post = response.data
+        this.post = response.data
       } catch (e) {
         this.error = e.message
       }
@@ -180,8 +179,7 @@ export default {
           id: this.post.post.id,
           token: this.$store.state.users.token
         })
-        console.log(this.post)
-        this.post.post = response.data
+        this.post = response.data
       } catch (e) {
         this.error = e.message
       }
@@ -194,8 +192,7 @@ export default {
             token: this.$store.state.users.token
           }
         )
-        console.log(this.post)
-        this.post.post = response.data
+        this.post = response.data
       } catch (e) {
         this.error = e.message
       }

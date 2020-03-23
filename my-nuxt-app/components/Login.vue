@@ -1,6 +1,24 @@
 <template>
   <transition>
     <div id="login">
+      <el-button
+        type="success"
+        disabled
+        v-if="loading"
+      >
+        デモデータでログイン
+      </el-button>
+      <el-button
+        v-else
+        type="success"
+        @click="demo"
+      >
+        デモデータでログイン
+      </el-button>
+      <i v-if="loading" class="el-icon-loading" />
+      <br />
+      <br />
+
       <transition name="button-fade" mode="out-in">
         <el-button
           v-if="view === 'Login'"
@@ -35,6 +53,7 @@ export default {
     return {
       error: null,
       button_type: "primary",
+      loading: false,
       view: "Login"
     }
   },
@@ -45,6 +64,18 @@ export default {
       } else {
         this.view = "Signup"
       }
+    },
+    async demo() {
+      this.loading = true
+      try {
+        await this.$store.dispatch("users/demo")
+        console.log(this.$store.state.users)
+      } catch (e) {
+        this.error.push(
+          "デモデータの作成に失敗しました。"
+        )
+      }
+      this.loading = false
     }
   }
 }

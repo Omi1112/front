@@ -1,18 +1,10 @@
 <template>
   <transition>
     <div id="login">
-      <el-button
-        type="success"
-        disabled
-        v-if="loading"
-      >
+      <el-button v-if="loading" type="success" disabled>
         デモデータでログイン
       </el-button>
-      <el-button
-        v-else
-        type="success"
-        @click="demo"
-      >
+      <el-button v-else type="success" @click="demo">
         デモデータでログイン
       </el-button>
       <i v-if="loading" class="el-icon-loading" />
@@ -71,9 +63,7 @@ export default {
         await this.$store.dispatch("users/demo")
         console.log(this.$store.state.users)
       } catch (e) {
-        this.error.push(
-          "デモデータの作成に失敗しました。"
-        )
+        this.error.push("デモデータの作成に失敗しました。")
       }
       this.loading = false
     }

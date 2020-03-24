@@ -51,7 +51,8 @@ module.exports = {
   },
 
   env: {
-    userUrl: process.env.USER_URL || "http://localhost:8080/users/test",
-    postUrl: process.env.POST_URL || "http://localhost:8090/posts"
+    userUrl: process.env.USER_URL || "http://localhost:8080",
+    postUrl: process.env.POST_URL || "http://localhost:8090",
+    pointUrl: process.env.POINT_URL || "http://localhost:9000"
   }
 }

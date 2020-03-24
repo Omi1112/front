@@ -32,6 +32,10 @@
                     </el-menu-item>
                   </el-menu-item-group>
                 </el-submenu>
+                <el-menu-item index="point" @click="getPoints">
+                  <i class="el-icon-ice-cream-round" />
+                  ポイント履歴
+                </el-menu-item>
                 <el-menu-item index="logout" @click="logout">
                   <i class="el-icon-back" />
                   <span>ログアウト</span>
@@ -68,12 +72,14 @@
 <script>
 import Login from "~/components/Login.vue"
 import PostMain from "~/components/posts/Main.vue"
+import PointMain from "~/components/points/Main.vue"
 import axios from "axios"
 
 export default {
   components: {
     Login,
-    PostMain
+    PostMain,
+    PointMain
   },
   data() {
     return {
@@ -101,10 +107,12 @@ export default {
     getPosts: async function(event) {
       var response = await axios.get(process.env.postUrl + "/posts")
       console.log(response)
+      this.nowMain = "PostMain"
       this.mainData = response.data
     },
     getPostsByUserId: async function(id, name) {
       var response = await axios.get(process.env.postUrl + "/user/" + id)
+      this.nowMain = "PostMain"
       this.mainData = response.data
     },
     getTodoList: async function(event) {
@@ -112,6 +120,14 @@ export default {
         process.env.postUrl + "/helper/" + this.$store.state.users.loginId
       )
       console.log(response)
+      this.nowMain = "PostMain"
+      this.mainData = response.data
+    },
+    getPoints: async function(event) {
+      var response = await axios.get(
+        process.env.pointUrl + "/points/" + this.$store.state.users.loginId
+      )
+      this.nowMain = "PointMain"
       this.mainData = response.data
     },
     login() {

@@ -165,4 +165,8 @@ export default {
   transform: translateX(20px);
   opacity: 0;
 }
+
+.el-menu-vertical-demo {
+  text-align: left;
+}
 </style>

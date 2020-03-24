@@ -2,7 +2,7 @@
   <div class="post-list">
     <transition-group tag="div" class="list" name="button-fade" mode="out-in">
       <div v-for="(post, key) in posts" :key="post.post.id" :data-index="key">
-        <card key="key" v-on:getPostsByUserId="getPostsByUserId" :post="post" />
+        <card key="key" :post="post" @getPostsByUserId="getPostsByUserId" />
       </div>
     </transition-group>
   </div>
@@ -22,8 +22,8 @@ export default {
   },
   methods: {
     getPostsByUserId(id, name) {
-      this.$emit('getPostsByUserID', id, name)
-    },
+      this.$emit("getPostsByUserId", id, name)
+    }
   }
 }
 </script>

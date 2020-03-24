@@ -1,7 +1,7 @@
 version: '3'
 services:
   front:
-    build: .
+    build: ./docker
     ports:
       - 3000:3000
     volumes:
@@ -11,8 +11,11 @@ services:
     environment:
       USER_URL: http://localhost:8080
       POST_URL: http://localhost:8090
+      POINT_URL: http://localhost:9000
     working_dir: /app/my-nuxt-app
-    command: npm run dev
+    command: >
+      ash -c 'npm install &&
+      npm run dev'
     networks:
       - my_network
 

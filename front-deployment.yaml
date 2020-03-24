@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+  labels:
+    app: front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: front
+        image: zemisemi/front
+        ports:
+        - containerPort: 3000
+        command:
+          - sh
+          - -c
+          - npm run dev
+        env:
+          - name: USER_URL
+            value: "http://a7af25b4c6b3211eaa5030e5971443b4-1215815598.ap-northeast-1.elb.amazonaws.com"
+          - name: POST_URL
+            value: "http://a7019d0ce6b3211eaa5030e5971443b4-769360394.ap-northeast-1.elb.amazonaws.com"

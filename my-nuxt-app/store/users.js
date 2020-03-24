@@ -40,6 +40,14 @@ export const actions = {
     commit("setLoginId", response.data.id)
     commit("setAuth", true)
   },
+  async demo({ commit }) {
+    var response = await axios.post(process.env.userUrl + "/demo")
+    console.log(response.data)
+
+    commit("setToken", response.data.token)
+    commit("setLoginId", response.data.id)
+    commit("setAuth", true)
+  },
   async logout({ commit }) {
     commit("setToken", "")
     commit("setLoginId", 0)

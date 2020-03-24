@@ -105,6 +105,13 @@ export default {
       return this.$store.state.users.loginId
     }
   },
+  watch: {
+    auth(val) {
+      if (val) {
+        this.nowMain = "About"
+      }
+    }
+  },
   methods: {
     getPosts: async function(event) {
       var response = await axios.get(process.env.postUrl + "/posts")

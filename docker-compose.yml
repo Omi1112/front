@@ -11,6 +11,7 @@ services:
     environment:
       USER_URL: http://localhost:8080
       POST_URL: http://localhost:8090
+      POINT_URL: http://localhost:9000
     working_dir: /app/my-nuxt-app
     command: >
       ash -c 'npm install &&

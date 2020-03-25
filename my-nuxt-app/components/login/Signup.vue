@@ -93,7 +93,8 @@ export default {
           password: this.password
         })
       } catch (e) {
-        this.error = e.message
+        this.error =
+          "既に使用されているメールアドレスです。他のメールアドレスを利用してください。"
       }
     }
   }

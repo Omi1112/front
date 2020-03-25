@@ -17,8 +17,8 @@
                     <i class="el-icon-user-solid" />
                   </el-col>
                   <el-col :span="20">
-                    ようこそ{{userName}}さん<br />
-                    所持ポイント{{userPoint}}
+                    ようこそ{{ userName }}さん<br />
+                    所持ポイント{{ userPoint }}
                   </el-col>
                 </el-row>
                 <el-submenu index="help">
@@ -124,11 +124,11 @@ export default {
         var response = await axios.get(
           process.env.userUrl + "/users/" + this.$store.state.users.loginId
         )
-        this.userName = response.data['name']
+        this.userName = response.data["name"]
         var response = await axios.get(
           process.env.pointUrl + "/sum/" + this.$store.state.users.loginId
         )
-        this.userPoint = response.data['Total']
+        this.userPoint = response.data["Total"]
       }
     }
   },

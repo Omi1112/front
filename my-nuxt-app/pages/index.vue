@@ -11,6 +11,16 @@
           <el-menu default-active="2" class="el-menu-vertical-demo">
             <transition name="component-fade" mode="out-in">
               <div v-if="auth" key="login">
+                <el-row class="user">
+                  <el-col :span="2">&nbsp;</el-col>
+                  <el-col :span="2">
+                    <i class="el-icon-user-solid" />
+                  </el-col>
+                  <el-col :span="20">
+                    ようこそ{{ userName }}さん<br />
+                    所持ポイント{{ userPoint }}
+                  </el-col>
+                </el-row>
                 <el-submenu index="help">
                   <template slot="title">
                     <i class="el-icon-document" />
@@ -94,7 +104,9 @@ export default {
     return {
       mainData: null,
       nowMain: "About",
-      isCollapse: true
+      isCollapse: true,
+      userName: "",
+      userPoint: 0
     }
   },
   computed: {
@@ -106,9 +118,17 @@ export default {
     }
   },
   watch: {
-    auth(val) {
+    async auth(val) {
       if (val) {
         this.nowMain = "About"
+        var response = await axios.get(
+          process.env.userUrl + "/users/" + this.$store.state.users.loginId
+        )
+        this.userName = response.data["name"]
+        var response = await axios.get(
+          process.env.pointUrl + "/sum/" + this.$store.state.users.loginId
+        )
+        this.userPoint = response.data["Total"]
       }
     }
   },

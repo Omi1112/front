@@ -16,35 +16,31 @@
             <span v-if="post.post.helperUserId === 0">
               誰か助けてください！！
             </span>
-            <span v-else-if="post.post.status == 0">
-              <el-button
-                type="text"
-                @click="
-                  $emit(
-                    'getPostsByUserId',
-                    post.helperUser.id,
-                    post.helperUser.name
-                  )
-                "
-              >
-                {{ post.helperUser.name }}
-              </el-button>
-              さんが助けます！
-            </span>
-            <span v-else-if="post.post.status != 0">
-              <el-button
-                type="text"
-                @click="
-                  $emit(
-                    'getPostsByUserId',
-                    post.helperUser.id,
-                    post.helperUser.name
-                  )
-                "
-              >
-                {{ post.helperUser.name }}
-              </el-button>
-              さんが助けます！
+            <span v-else>
+              <span>
+                <el-button
+                  type="text"
+                  @click="
+                    $emit(
+                      'getPostsByUserId',
+                      post.helperUser.id,
+                      post.helperUser.name
+                    )
+                  "
+                >
+                  <span v-if="post.helperUser.id == loginId">
+                    あなた
+                  </span>
+                  <span v-else>{{ post.helperUser.name }}さん</span>
+                </el-button>
+              </span>
+              が
+              <span v-if="post.post.status != 0">
+                助けました！
+              </span>
+              <span v-else>
+                助けます！
+              </span>
             </span>
           </el-col>
           <el-col :span="8">

@@ -17,7 +17,7 @@ services:
       ash -c 'npm install &&
       npm run dev'
     networks:
-      - my_network
+    - my_network
 
 networks:
   my_network:

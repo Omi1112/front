@@ -6,7 +6,7 @@
           <el-col :span="8">
             <el-button
               type="text"
-              @click="$emit('getPostsByUserId', post.user.id, post.user.name)"
+              @click="getByUserId(post.user.id)"
             >
               {{ post.user.name }}
             </el-button>
@@ -20,13 +20,7 @@
               <span>
                 <el-button
                   type="text"
-                  @click="
-                    $emit(
-                      'getPostsByUserId',
-                      post.helperUser.id,
-                      post.helperUser.name
-                    )
-                  "
+                  @click="getByUserId(post.helperUser.id)"
                 >
                   <span v-if="post.helperUser.id == loginId">
                     あなた
@@ -147,6 +141,9 @@ export default {
     }
   },
   methods: {
+    async getByUserId(id) {
+      await this.$store.dispatch("posts/getPostsByUserId", id)
+    },
     async setHelperId() {
       try {
         var response = await axios.post(process.env.postUrl + "/helper", {

@@ -154,6 +154,10 @@ export default {
           token: this.$store.state.users.token
         })
         this.post = response.data
+        await this.$store.dispatch(
+          "users/updatePoint",
+          this.$store.state.users.loginId
+        )
       } catch (e) {
         this.error = e.message
       }
@@ -165,6 +169,10 @@ export default {
           { data: { token: this.$store.state.users.token } }
         )
         this.post = response.data
+        await this.$store.dispatch(
+          "users/updatePoint",
+          this.$store.state.users.loginId
+        )
       } catch (e) {
         this.error = e.message
       }
@@ -176,6 +184,10 @@ export default {
           token: this.$store.state.users.token
         })
         this.post = response.data
+        await this.$store.dispatch(
+          "users/updatePoint",
+          this.$store.state.users.loginId
+        )
       } catch (e) {
         this.error = e.message
       }
@@ -189,6 +201,10 @@ export default {
           }
         )
         this.post = response.data
+        await this.$store.dispatch(
+          "users/updatePoint",
+          this.$store.state.users.loginId
+        )
       } catch (e) {
         this.error = e.message
       }

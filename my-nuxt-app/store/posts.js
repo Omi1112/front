@@ -12,15 +12,15 @@ export const mutations = {
 }
 
 export const actions = {
-  async getPosts ({ commit }) {
+  async getPosts({ commit }) {
     var response = await axios.get(process.env.postUrl + "/posts")
     commit("setPosts", response.data)
   },
-  async getPostsByUserId ({ commit }, id) {
+  async getPostsByUserId({ commit }, id) {
     var response = await axios.get(process.env.postUrl + "/user/" + id)
     commit("setPosts", response.data)
   },
-  async getPostsByHelperId ({ commit }, id) {
+  async getPostsByHelperId({ commit }, id) {
     var response = await axios.get(process.env.postUrl + "/helper/" + id)
     commit("setPosts", response.data)
   }

@@ -134,15 +134,24 @@ export default {
       this.nowMain = "PostMain"
     },
     getPostsByUserId: async function(id) {
-      await this.$store.dispatch("posts/getPostsByUserId", this.$store.state.users.loginId)
+      await this.$store.dispatch(
+        "posts/getPostsByUserId",
+        this.$store.state.users.loginId
+      )
       this.nowMain = "PostMain"
     },
     getTodoList: async function(event) {
-      await this.$store.dispatch("posts/getPostsByHelperId", this.$store.state.users.loginId)
+      await this.$store.dispatch(
+        "posts/getPostsByHelperId",
+        this.$store.state.users.loginId
+      )
       this.nowMain = "PostMain"
     },
     getPoints: async function(event) {
-      await this.$store.dispatch("points/getPointsByUserId", this.$store.state.users.loginId)
+      await this.$store.dispatch(
+        "points/getPointsByUserId",
+        this.$store.state.users.loginId
+      )
       this.nowMain = "PointMain"
     },
     login() {

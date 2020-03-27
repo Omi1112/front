@@ -4,10 +4,7 @@
       <div slot="header" class="clearfix">
         <el-row :gutter="5">
           <el-col :span="8">
-            <el-button
-              type="text"
-              @click="getByUserId(post.user.id)"
-            >
+            <el-button type="text" @click="getByUserId(post.user.id)">
               {{ post.user.name }}
             </el-button>
             さんの投稿
@@ -18,10 +15,7 @@
             </span>
             <span v-else>
               <span>
-                <el-button
-                  type="text"
-                  @click="getByUserId(post.helperUser.id)"
-                >
+                <el-button type="text" @click="getByUserId(post.helperUser.id)">
                   <span v-if="post.helperUser.id == loginId">
                     あなた
                   </span>

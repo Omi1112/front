@@ -19,22 +19,6 @@ export default {
     posts() {
       return this.$store.state.posts.posts
     }
-  },
-  props: {
-    data: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-      isCollapse: true
-    }
-  },
-  methods: {
-    getPostsByUserId(id, name) {
-      this.$emit("getPostsByUserId", id, name)
-    }
   }
 }
 </script>

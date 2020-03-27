@@ -135,7 +135,6 @@ export default {
   methods: {
     getPosts: async function(event) {
       var response = await axios.get(process.env.postUrl + "/posts")
-      console.log(response)
       this.nowMain = "PostMain"
       this.mainData = response.data
     },
@@ -148,7 +147,6 @@ export default {
       var response = await axios.get(
         process.env.postUrl + "/helper/" + this.$store.state.users.loginId
       )
-      console.log(response)
       this.nowMain = "PostMain"
       this.mainData = response.data
     },

@@ -56,7 +56,6 @@ export default {
       }
     },
     async windowToggle() {
-      console.log("run!!")
       try {
         var response = await axios.get(
           process.env.postUrl + "/amount/" + this.loginId

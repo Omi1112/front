@@ -71,7 +71,6 @@ export default {
           email: this.email,
           password: this.password
         })
-        console.log(this.$store.state.users)
       } catch (e) {
         this.error.push(
           "ログインに失敗しました。メールアドレスとパスワードを確認してください。"

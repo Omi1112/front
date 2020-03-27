@@ -1,6 +1,6 @@
 <template>
   <section>
-    <List :points="data" />
+    <List :points="points" />
   </section>
 </template>
 
@@ -12,15 +12,9 @@ export default {
   components: {
     List
   },
-  props: {
-    data: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-      points: []
+  computed: {
+    points() {
+      return this.$store.state.points.points
     }
   }
 }

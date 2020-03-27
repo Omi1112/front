@@ -1,7 +1,7 @@
 <template>
   <section>
     <Create />
-    <List :posts="data" @getPostsByUserId="getPostsByUserId" />
+    <List :posts="posts" @getPostsByUserId="getPostsByUserId" />
   </section>
 </template>
 
@@ -15,21 +15,9 @@ export default {
     List,
     Create
   },
-  props: {
-    data: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {
-      posts: [],
-      isCollapse: true
-    }
-  },
-  methods: {
-    getPostsByUserId(id, name) {
-      this.$emit("getPostsByUserId", id, name)
+  computed: {
+    posts() {
+      return this.$store.state.posts.posts
     }
   }
 }

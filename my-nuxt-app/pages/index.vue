@@ -74,11 +74,7 @@
         </el-col>
         <el-col :span="20">
           <transition name="component-fade" mode="out-in">
-            <component
-              :is="nowMain"
-              :data="mainData"
-              @getPostsByUserId="getPostsByUserId"
-            />
+            <component :is="nowMain" />
           </transition>
         </el-col>
       </el-row>
@@ -134,28 +130,29 @@ export default {
   },
   methods: {
     getPosts: async function(event) {
-      var response = await axios.get(process.env.postUrl + "/posts")
+      await this.$store.dispatch("posts/getPosts")
       this.nowMain = "PostMain"
-      this.mainData = response.data
     },
-    getPostsByUserId: async function(id, name) {
-      var response = await axios.get(process.env.postUrl + "/user/" + id)
+    getPostsByUserId: async function(id) {
+      await this.$store.dispatch(
+        "posts/getPostsByUserId",
+        this.$store.state.users.loginId
+      )
       this.nowMain = "PostMain"
-      this.mainData = response.data
     },
     getTodoList: async function(event) {
-      var response = await axios.get(
-        process.env.postUrl + "/helper/" + this.$store.state.users.loginId
+      await this.$store.dispatch(
+        "posts/getPostsByHelperId",
+        this.$store.state.users.loginId
       )
       this.nowMain = "PostMain"
-      this.mainData = response.data
     },
     getPoints: async function(event) {
-      var response = await axios.get(
-        process.env.pointUrl + "/points/" + this.$store.state.users.loginId
+      await this.$store.dispatch(
+        "points/getPointsByUserId",
+        this.$store.state.users.loginId
       )
       this.nowMain = "PointMain"
-      this.mainData = response.data
     },
     login() {
       this.nowMain = "Login"

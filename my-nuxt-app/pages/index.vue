@@ -100,9 +100,7 @@ export default {
     return {
       mainData: null,
       nowMain: "About",
-      isCollapse: true,
-      userName: "",
-      userPoint: 0
+      isCollapse: true
     }
   },
   computed: {
@@ -111,20 +109,26 @@ export default {
     },
     loginId() {
       return this.$store.state.users.loginId
+    },
+    userName() {
+      return this.$store.state.users.name
+    },
+    userPoint() {
+      return this.$store.state.users.point
     }
   },
   watch: {
     async auth(val) {
       if (val) {
         this.nowMain = "About"
-        var response = await axios.get(
-          process.env.userUrl + "/users/" + this.$store.state.users.loginId
+        await this.$store.dispatch(
+          "users/updatePoint",
+          this.$store.state.users.loginId
         )
-        this.userName = response.data["name"]
-        var response = await axios.get(
-          process.env.pointUrl + "/sum/" + this.$store.state.users.loginId
+        await this.$store.dispatch(
+          "users/updateName",
+          this.$store.state.users.loginId
         )
-        this.userPoint = response.data["Total"]
       }
     }
   },

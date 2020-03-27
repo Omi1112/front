@@ -3,7 +3,9 @@ import axios from "axios"
 export const state = () => ({
   token: "",
   loginId: 0,
-  auth: false
+  auth: false,
+  point: 0,
+  name: ""
 })
 
 export const mutations = {
@@ -15,6 +17,12 @@ export const mutations = {
   },
   setLoginId(state, id) {
     state.loginId = id
+  },
+  setName(state, name) {
+    state.name = name
+  },
+  setPoint(state, point) {
+    state.point = point
   }
 }
 
@@ -26,6 +34,14 @@ export const actions = {
       commit("set", response.data)
     }
     setInterval(callApi, 10000)
+  },
+  async updateName({ commit }, id) {
+    var response = await axios.get(process.env.userUrl + "/users/" + id)
+    commit("setName", response.data["name"])
+  },
+  async updatePoint({ commit }, id) {
+    var response = await axios.get(process.env.pointUrl + "/sum/" + id)
+    commit("setPoint", response.data["Total"])
   },
   async signup({ dispatch }, userData) {
     var response = await axios.post(process.env.userUrl + "/users", userData)
@@ -51,6 +67,8 @@ export const actions = {
   async logout({ commit }) {
     commit("setToken", "")
     commit("setLoginId", 0)
+    commit("setPoint", 0)
+    commit("setName", "")
     commit("setAuth", false)
   }
 }

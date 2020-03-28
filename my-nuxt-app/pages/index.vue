@@ -1,83 +1,156 @@
 <template>
   <section class="container">
     <div id="app">
-      <el-row class="main">
-        <br />
-        <el-col :span="4">
-          <br />
-          <br />
-          <br />
-          <br />
-          <el-menu default-active="2" class="el-menu-vertical-demo">
-            <transition name="component-fade" mode="out-in">
-              <div v-if="auth" key="login">
-                <el-row class="user">
-                  <el-col :span="2">&nbsp;</el-col>
-                  <el-col :span="2">
-                    <i class="el-icon-user-solid" />
-                  </el-col>
-                  <el-col :span="20">
-                    ようこそ{{ userName }}さん<br />
-                    所持ポイント{{ userPoint }}
-                  </el-col>
-                </el-row>
-                <el-submenu index="help">
-                  <template slot="title">
-                    <i class="el-icon-document" />
-                    <span>助けて！！</span>
-                  </template>
-                  <el-menu-item-group>
-                    <el-menu-item index="1-1" @click="getPosts">
-                      みんなの助けて！！
-                    </el-menu-item>
-                    <el-menu-item
-                      index="1-2"
-                      @click="getPostsByUserId(loginId)"
-                    >
-                      あなたの助けて！！
-                    </el-menu-item>
-                    <el-menu-item index="1-3" @click="getTodoList">
-                      あなたが助ける！！
-                    </el-menu-item>
-                  </el-menu-item-group>
-                </el-submenu>
-                <el-menu-item index="point" @click="getPoints">
-                  <i class="el-icon-ice-cream-round" />
-                  ポイント履歴
-                </el-menu-item>
-                <el-menu-item index="about" @click="nowMain = 'About'">
-                  <i class="el-icon-info" />
-                  どんなサービス？
-                </el-menu-item>
-                <el-menu-item index="logout" @click="logout">
-                  <i class="el-icon-back" />
-                  <span>ログアウト</span>
-                </el-menu-item>
-              </div>
-              <div v-else key="logout">
-                <el-menu-item
-                  v-if="!auth"
-                  key="login"
-                  index="login"
-                  @click="login"
-                >
-                  <i class="el-icon-right" />
-                  <span>ログイン</span>
-                </el-menu-item>
-                <el-menu-item index="about" @click="nowMain = 'About'">
-                  <i class="el-icon-info" />
-                  どんなサービス？
-                </el-menu-item>
-              </div>
-            </transition>
-          </el-menu>
-        </el-col>
-        <el-col :span="20">
-          <transition name="component-fade" mode="out-in">
-            <component :is="nowMain" />
-          </transition>
-        </el-col>
-      </el-row>
+      <!-- <el-menu
+          default-active="activeIndex"
+          mode="horizontal"
+          class="el-menu-demo help-menu"
+        > -->
+      <!-- <transition name="component-fade" mode="out-in"> -->
+      <!-- <div v-if="auth" key="login"> -->
+      <!-- <el-row class="user"> -->
+      <!-- <el-col :span="2">&nbsp;</el-col> -->
+      <!-- <el-col :span="2"> -->
+      <!-- <i class="el-icon-user-solid" /> -->
+      <!-- </el-col>
+              <el-col :span="20"> -->
+      <!-- ようこそ{{ userName }}さん<br />
+          所持ポイント{{ userPoint }} -->
+      <!-- </el-col> -->
+      <!-- </el-row> -->
+      <!-- <el-row class="user"> -->
+      <transition name="component-fade" mode="out-in">
+        <el-menu
+          v-if="auth"
+          default-active="activeIndex"
+          mode="horizontal"
+          class="el-menu-demo"
+        >
+          <el-submenu index="help">
+            <template slot="title">
+              <i class="el-icon-s-operation" />
+              <span>メニュー</span>
+            </template>
+            <el-menu-item index="user" @click="getPostsByUserId(loginId)">
+              <i class="el-icon-user-solid" />
+              ようこそ{{ userName }}さん
+            </el-menu-item>
+            <!-- <el-menu-item-group>
+              <el-submenu index="help">
+                <template slot="title">
+                  <i class="el-icon-document" />
+                  <span>助けて！！</span>
+                </template>
+                <el-menu-item-group> -->
+            <el-menu-item index="1-1" @click="getPosts">
+              <i class="el-icon-document" />
+              みんなの助けて！！
+            </el-menu-item>
+            <el-menu-item index="1-2" @click="getPostsByUserId(loginId)">
+              <i class="el-icon-star-on" />
+              あなたの助けて！！
+            </el-menu-item>
+            <el-menu-item index="1-3" @click="getTodoList">
+              <i class="el-icon-check" />
+              あなたが助ける！！
+            </el-menu-item>
+
+            <el-menu-item index="point" @click="getPoints">
+              <i class="el-icon-ice-cream-round" />
+              ポイント履歴
+            </el-menu-item>
+            <el-menu-item index="about" @click="nowMain = 'About'">
+              <i class="el-icon-info" />
+              どんなサービス？
+            </el-menu-item>
+            <el-menu-item index="logout" @click="logout">
+              <i class="el-icon-back" />
+              <span>ログアウト</span>
+            </el-menu-item>
+          </el-submenu>
+          <el-menu-item index="point_only" @click="getPoints">
+            <i class="el-icon-ice-cream-round" />
+            所持ポイント{{ userPoint }}
+          </el-menu-item>
+
+          <!-- <el-submenu index="help">
+            <template slot="title">
+              <i class="el-icon-document" />
+              <span>助けて！！</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="1-1" @click="getPosts">
+                みんなの助けて！！
+              </el-menu-item>
+              <el-menu-item index="1-2" @click="getPostsByUserId(loginId)">
+                あなたの助けて！！
+              </el-menu-item>
+              <el-menu-item index="1-3" @click="getTodoList">
+                あなたが助ける！！
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu> -->
+          <!-- <el-menu-item index="point" @click="getPoints">
+            <i class="el-icon-ice-cream-round" />
+            ポイント履歴
+          </el-menu-item>
+          <el-menu-item index="about" @click="nowMain = 'About'">
+            <i class="el-icon-info" />
+            どんなサービス？
+          </el-menu-item>
+          <el-menu-item index="logout" @click="logout">
+            <i class="el-icon-back" />
+            <span>ログアウト</span>
+          </el-menu-item> -->
+        </el-menu>
+
+        <el-menu
+          v-if="!auth"
+          default-active="activeIndex"
+          mode="horizontal"
+          class="el-menu-demo help-menu"
+        >
+          <el-menu-item index="about" @click="nowMain = 'About'">
+            <i class="el-icon-info" />
+            どんなサービス？
+          </el-menu-item>
+          <el-menu-item key="login" index="login" @click="login">
+            <i class="el-icon-right" />
+            <span>ログイン</span>
+          </el-menu-item>
+        </el-menu>
+      </transition>
+
+      <!-- <transition name="component-fade" mode="out-in">
+        <el-menu-item v-if="auth" index="point" @click="getPoints">
+          <i class="el-icon-ice-cream-round" />
+          ポイント履歴
+        </el-menu-item>
+      </transition>
+      <el-menu-item
+        index="about"
+        class="help-menu-item"
+        @click="nowMain = 'About'"
+      >
+        <i class="el-icon-info" />
+        どんなサービス？
+      </el-menu-item>
+      <transition name="component-fade" mode="out-in">
+        <el-menu-item v-if="auth" index="logout" @click="logout">
+          <i class="el-icon-back" />
+          <span>ログアウト</span>
+        </el-menu-item>
+      </transition>
+      <transition name="component-fade" mode="out-in">
+        <el-menu-item v-if="!auth" key="login" index="login" @click="login">
+          <i class="el-icon-right" />
+          <span>ログイン</span>
+        </el-menu-item>
+      </transition> -->
+
+      <transition name="component-fade" mode="out-in">
+        <component :is="nowMain" />
+      </transition>
     </div>
   </section>
 </template>

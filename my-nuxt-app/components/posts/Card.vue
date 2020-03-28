@@ -3,35 +3,36 @@
     <el-card shadow="hover" class="box-card">
       <div slot="header" class="clearfix">
         <el-row :gutter="5">
-          <el-col :span="8">
+          <el-col :span="15" class="card-header-col">
             <el-button type="text" @click="getByUserId(post.user.id)">
-              {{ post.user.name }}
+              {{ post.user.name }}さん
             </el-button>
-            さんの投稿
-          </el-col>
-          <el-col :span="8">
-            <span v-if="post.post.helperUserId === 0">
+            の投稿 <br />
+            <div v-if="post.post.helperUserId === 0" class="helper-name">
               誰か助けてください！！
-            </span>
-            <span v-else>
+            </div>
+            <div v-else class="helper-name">
               <span>
-                <el-button type="text" @click="getByUserId(post.helperUser.id)">
+                <el-button
+                  class="helper-name"
+                  type="text"
+                  @click="getByUserId(post.helperUser.id)"
+                >
                   <span v-if="post.helperUser.id == loginId">
-                    あなた
+                    あなたが
                   </span>
-                  <span v-else>{{ post.helperUser.name }}さん</span>
+                  <span v-else>{{ post.helperUser.name }}さんが</span>
                 </el-button>
+                <span v-if="post.post.status != 0">
+                  助けました！
+                </span>
+                <span v-else>助けます！</span>
               </span>
-              が
-              <span v-if="post.post.status != 0">
-                助けました！
-              </span>
-              <span v-else>
-                助けます！
-              </span>
-            </span>
+            </div>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="8" class="card-header-btn">
+            <i class="el-icon-ice-cream-round" />
+            {{ post.post.point }}ポイント <br />
             <transition name="button-fade" mode="out-in">
               <span v-if="post.post.userId === loginId" key="me">
                 <transition name="button-fade" mode="out-in">
@@ -105,7 +106,7 @@
 
               <span v-else key="other">
                 <el-button key="other" type="success" disabled>
-                  他の人が助けるよ！
+                  他の人が助ける
                 </el-button>
               </span>
             </transition>
@@ -205,6 +206,19 @@ export default {
 </script>
 
 <style>
+.helper-name {
+  height: 0px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.box-card {
+  font-size: 14px;
+  max-width: 480px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
 .button-fade-enter-active,
 .button-fade-leave-active {
   transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);

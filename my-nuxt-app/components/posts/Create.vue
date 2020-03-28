@@ -82,10 +82,4 @@ export default {
 .clearfix:after {
   clear: both;
 }
-
-.box-card {
-  width: 600px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
 </style>

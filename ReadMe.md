@@ -7,7 +7,8 @@
 # 利用技術
 
 ## 構成図
-https://user-images.githubusercontent.com/50559028/77821926-587acb00-7131-11ea-9f95-f92d6ea9a26a.png
+![構成図](https://user-images.githubusercontent.com/50559028/77822094-ee632580-7132-11ea-9d2b-3ea20abd8a71.png)
+
 
 ## 言語
 1. Go

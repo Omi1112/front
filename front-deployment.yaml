@@ -25,8 +25,8 @@ spec:
           - "npm run build && \ npm run start"
         env:
           - name: USER_URL
-            value: "https://gonear:8080"
+            value: "https://gonear.work:8080"
           - name: POST_URL
-            value: "https://gonear:8090"
+            value: "https://gonear.work:8090"
           - name: POINT_URL
-            value: "https://gonear:9000"
+            value: "https://gonear.work:9000"

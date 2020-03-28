@@ -23,6 +23,11 @@ export default {
 </script>
 
 <style>
+.box-card {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
 .button-fade-enter-active,
 .button-fade-leave-active {
   transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);

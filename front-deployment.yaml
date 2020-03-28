@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: front
+  name: front-deployment
   labels:
-    app: front
+    app: ap
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: front
+      app: ap
   template:
     metadata:
       labels:
-        app: front
+        app: ap
     spec:
       containers:
       - name: front
@@ -22,9 +22,11 @@ spec:
         command:
           - sh
           - -c
-          - npm run dev
+          - "npm run build && \ npm run start"
         env:
           - name: USER_URL
-            value: "http://a7af25b4c6b3211eaa5030e5971443b4-1215815598.ap-northeast-1.elb.amazonaws.com"
+            value: "https://gonear:8080"
           - name: POST_URL
-            value: "http://a7019d0ce6b3211eaa5030e5971443b4-769360394.ap-northeast-1.elb.amazonaws.com"
+            value: "https://gonear:8090"
+          - name: POINT_URL
+            value: "https://gonear:9000"

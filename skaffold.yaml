@@ -2,7 +2,7 @@ apiVersion: skaffold/v1beta7
 kind: Config
 build:
   artifacts:
-  - image: zemisemi/user
+  - image: zemisemi/front
     context: .
   local:
     push: true

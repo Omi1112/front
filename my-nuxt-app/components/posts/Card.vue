@@ -114,7 +114,13 @@
         </el-row>
       </div>
       <div class="text item">
-        {{ post.post.body }}
+        {{ post.post.body }}<br />
+        関連タグ：
+        <span v-for="(tag, key) in post.tags" :key="key" :data-index="key">
+          <el-button type="text" @click="getByTagId(tag.id)">
+            {{ tag.body }}
+          </el-button>
+        </span>
       </div>
     </el-card>
   </transition>
@@ -137,7 +143,12 @@ export default {
   },
   methods: {
     async getByUserId(id) {
+      this.$store.dispatch("posts/initPosts")
       await this.$store.dispatch("posts/getPostsByUserId", id)
+    },
+    async getByTagId(id) {
+      this.$store.dispatch("posts/initPosts")
+      await this.$store.dispatch("posts/getPostsByTagId", id)
     },
     async setHelperId() {
       try {

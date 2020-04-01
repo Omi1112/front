@@ -5,7 +5,7 @@
         <card key="key" :post="post" />
       </div>
     </transition-group>
-    <i class="el-icon-bottom" v-if="lastGetLen != 0" @click="getPosts"></i>
+    <i v-if="lastGetLen != 0" class="el-icon-bottom" @click="getPosts" />
   </div>
 </template>
 
@@ -15,20 +15,22 @@ export default {
   components: {
     Card
   },
-  computed: {
-    lastGetLen() {
-      return this.$store.state.posts.lastGetLen
-    }
-  },
   props: {
     posts: {
       type: Object,
       required: true
     }
   },
+  computed: {
+    lastGetLen() {
+      return this.$store.state.posts.lastGetLen
+    }
+  },
   methods: {
     getPosts: async function(event) {
-      await this.$store.dispatch("posts/" + this.$store.state.posts.lastCallFunc)
+      await this.$store.dispatch(
+        "posts/" + this.$store.state.posts.lastCallFunc
+      )
     }
   }
 }

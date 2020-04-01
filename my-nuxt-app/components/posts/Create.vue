@@ -14,11 +14,49 @@
           支払いポイント<br />
           （支払い可能ポイント：{{ maxPoint | addComma }}ポイント）
           <el-slider v-model="point" :max="maxPoint" :step="10" show-input />
-          <el-input v-model="tag" type="text" />
-          <el-button type="primary" @click="addTag(tag)">タグ追加</el-button>
-          <span v-for="(tag, key) in suggestTagList" :key="key" :data-index="key">
-            <el-button type="text" @click="addTag(tag.body)">{{tag.body}}</el-button>
-          </span>
+          <el-row>
+            <el-col :span="17">
+              <el-input
+                v-model="tag"
+                type="text"
+                placeholder="タグを入力してください"
+              />
+            </el-col>
+            <el-col :span="6">
+              <el-button type="primary" @click="addTag(tag)">
+                タグ追加
+              </el-button>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="10">
+              このタグ？？？<br />
+              <div
+                v-for="(tag, key) in suggestTagList"
+                :key="key"
+                :data-index="key"
+              >
+                <el-button type="text" @click="addTag(tag.body)">
+                  {{ tag.body }}
+                </el-button>
+              </div>
+            </el-col>
+
+            <el-col :span="10">
+              追加タグ
+              <div
+                v-for="(tag, key) in inputTagList"
+                :key="key"
+                :data-index="key"
+              >
+                <el-button type="text" @click="takeTag(key)">
+                  {{ tag.body }}
+                  <br />
+                </el-button>
+              </div>
+            </el-col>
+          </el-row>
+          <br />
           <el-button type="primary" native-type="submit">送信</el-button>
         </form>
       </el-card>
@@ -40,7 +78,7 @@ export default {
       body: "",
       tag: "",
       inputTagList: [],
-      suggestTagList: [],
+      suggestTagList: []
     }
   },
   computed: {
@@ -49,8 +87,9 @@ export default {
     }
   },
   watch: {
-    async getTags(tag) {
+    async tag(tag) {
       if (tag !== "") {
+        console.log(tag)
         try {
           var response = await axios.get(
             process.env.postUrl + "/tag/like/" + tag
@@ -60,7 +99,7 @@ export default {
           this.error = e.message
         }
       } else {
-          this.suggestTagList = []
+        this.suggestTagList = []
       }
     }
   },
@@ -74,8 +113,11 @@ export default {
           token: this.$store.state.users.token
         })
         this.body = ""
+        this.tag = ""
         this.point = 0
         this.postWindowFlg = false
+        this.inputTagList = []
+        this.suggestTagList = []
       } catch (e) {
         this.error = e.message
       }
@@ -92,7 +134,10 @@ export default {
       }
     },
     async addTag(body) {
-      this.inputTagList.push({id: 0, body: body})
+      this.inputTagList.push({ id: 0, body: body })
+    },
+    async takeTag(key) {
+      this.inputTagList.splice(key, 1)
     }
   }
 }

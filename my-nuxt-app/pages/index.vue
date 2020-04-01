@@ -125,10 +125,12 @@ export default {
   },
   methods: {
     getPosts: async function(event) {
+      this.$store.dispatch("posts/initPosts")
       await this.$store.dispatch("posts/getPosts")
       this.nowMain = "PostMain"
     },
     getPostsByUserId: async function(id) {
+      this.$store.dispatch("posts/initPosts")
       await this.$store.dispatch(
         "posts/getPostsByUserId",
         this.$store.state.users.loginId
@@ -136,6 +138,7 @@ export default {
       this.nowMain = "PostMain"
     },
     getTodoList: async function(event) {
+      this.$store.dispatch("posts/initPosts")
       await this.$store.dispatch(
         "posts/getPostsByHelperId",
         this.$store.state.users.loginId

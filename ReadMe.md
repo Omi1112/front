@@ -9,15 +9,18 @@
 2. お助けマッチング
 3. お助け完了機能（助けて貰った側：ポイント支払い）
 4. お助け完了機能（助けた側：ポイント受け取り）
-5. ポイント履歴確認機能
-6. ユーザー登録
-7. ログイン
-8. デモデータ自動生成機能
+5. タグの登録
+6. タグのリアルタイムサジェスト
+7. タグでの検索
+8. ポイント履歴確認機能
+9. ユーザー登録
+10. ログイン
+11. デモデータ自動生成機能
 
 # 利用技術
 
 ## 構成図
-![構成図](https://user-images.githubusercontent.com/50559028/77822094-ee632580-7132-11ea-9d2b-3ea20abd8a71.png)
+![構成図](https://user-images.githubusercontent.com/50559028/78245939-475ffe80-7523-11ea-9ff8-0fb01ef5ba65.png)
 
 
 ## 言語
@@ -36,7 +39,7 @@
 4. skaffold(kubernetes/CICD補助ツール)
 
 ## クラウド
-1. AWS-EKS
+1. AWS/EKS/EC2/RDS/ELB/NATGateway/Route53/ACM
 2. CircleCi
 3. docker hub
 

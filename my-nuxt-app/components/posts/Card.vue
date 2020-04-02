@@ -115,9 +115,9 @@
       </div>
       <div class="text item">
         {{ post.post.body }}<br />
-        関連タグ：
+        関連タグ
         <span v-for="(tag, key) in post.tags" :key="key" :data-index="key">
-          <el-button type="text" @click="getByTagId(tag.id)">
+          ：<el-button type="text" @click="getByTagId(tag.id)">
             {{ tag.body }}
           </el-button>
         </span>

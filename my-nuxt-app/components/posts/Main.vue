@@ -1,7 +1,7 @@
 <template>
   <section>
     <Create />
-    <List :posts="posts" @getPostsByUserId="getPostsByUserId" />
+    <List :posts="posts" />
   </section>
 </template>
 

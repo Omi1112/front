@@ -10,24 +10,35 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "test": "jest --config jest.config.js"
   },
   "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "@nuxtjs/axios": "^5.9.5",
     "axios": "^0.19.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^25.2.6",
+    "babel-preset-vue-app": "^2.0.0",
     "dayjs": "^1.8.20",
     "element-ui": "^2.13.0",
+    "lodash.clonedeep": "^4.5.0",
     "nuxt": "^2.11.0",
     "vee-validate": "^3.2.5",
     "vuex-persistedstate": "^2.7.1"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.32",
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^6.10.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "jest": "^25.2.7",
+    "ts-jest": "^25.3.0",
+    "vue-jest": "^3.0.5"
   }
 }
